@@ -5,8 +5,8 @@
  */
 function hex_password(pwd, key) {
   var hexone = sha512.hmac(key, pwd);
-  var hextwo = sha512.hmac("hello", hexone);
-  var hexthree = sha512.hmac("world", hexone);
+  var hextwo = sha512.hmac(hexone.slice(0, hexone.length/2), hexone);
+  var hexthree = sha512.hmac(hexone.slice(-(hexone.length/2)), hexone);
 
   var source = hextwo.split("");
   var rule = hexthree.split("");
@@ -15,7 +15,7 @@ function hex_password(pwd, key) {
   // 字母大小写转换
   for (var i = 0; i < source.length; ++i) {
     if (isNaN(source[i])) {
-      var str = "whenthecatisawaythemicewillplay666";
+      var str = "maytheforcebewithyou";
       if (str.search(rule[i]) > -1) {
         source[i] = source[i].toUpperCase();
       }
